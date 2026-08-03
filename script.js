@@ -144,7 +144,7 @@ function renderSlide(index, animate = true) {
     apply();
   }
 
-  if (heroImg) heroImg.alt = altFor(works[0], 0);
+  if (heroImg) heroImg.alt = i18n[lang].work_building || "";
 }
 
 function goTo(index) {

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Мамедов Амаль — Portfolio</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* PDF overlay: same look as site, but everything unfolded */
+    body {
+      background:
+        radial-gradient(900px 500px at 100% 0%, rgba(47, 111, 237, 0.1), transparent 55%),
+        radial-gradient(700px 420px at 0% 30%, rgba(45, 106, 79, 0.08), transparent 50%),
+        #f7f9fc !important;
+    }
+    .topbar .lang-btn,
+    .menu-btn,
+    .btn-open { display: none !important; }
+    .topbar { position: relative; }
+    .work-visual { cursor: default; pointer-events: none; }
+    .work-gallery {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 1rem;
+      padding: 0 1rem 1rem;
+    }
+    .work-gallery img {
+      width: 100%;
+      aspect-ratio: 16/10;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+    }
+    .work {
+      display: block !important;
+      page-break-inside: avoid;
+    }
+    .work-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.2rem;
+      align-items: center;
+      padding: 1rem;
+    }
+    .work-reverse .work-inner { grid-template-columns: 0.9fr 1.1fr; }
+    .work-reverse .work-inner .work-visual { order: 2; }
+    .work-reverse .work-inner .work-info { order: 1; }
+    .video-note {
+      grid-column: 1 / -1;
+      margin: 0;
+      padding: 0.7rem 0.9rem;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--ink);
+      font-size: 0.92rem;
+    }
+    .block, .hero, .footer { page-break-inside: avoid; }
+    .hero-title { font-size: 72pt !important; }
+    @page { size: A4; margin: 10mm; }
+    @media print {
+      .topbar { backdrop-filter: none; background: #f7f9fc; }
+      body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="nav">
+      <a href="#about">Обо мне</a>
+      <a href="#skills">Навыки</a>
+      <a href="#gallery">Галерея работ</a>
+      <a href="#experience">Опыт</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1 class="hero-title">PORTFOLIO</h1>
+      <p class="hero-sub">Мамедов Амаль · бренд-менеджер / дизайнер / маркетолог</p>
+    </section>
+
+    <section class="block" id="about">
+      <h2 class="block-title">ОБО МНЕ <span class="arrow">↘</span></h2>
+      <div class="about-grid">
+        <div class="about-photo">
+          <img src="assets/photo/amal.png" alt="Мамедов Амаль" />
+        </div>
+        <div class="about-copy">
+          <p class="about-lead">
+            Привет! Меня зовут Амаль, и я многопрофильный специалист в брендинге, маркетинге и дизайне.
+          </p>
+          <p class="about-meta">
+            Возраст: 22<br />
+            Образование: РЭУ им. Плеханова, реклама и связи с общественностью
+          </p>
+          <ul class="spec-list">
+            <li>БРЕНД-МЕНЕДЖМЕНТ / ПОЗИЦИОНИРОВАНИЕ</li>
+            <li>МАРКЕТИНГ / МЕДИАБАИНГ</li>
+            <li>ДИЗАЙН / FIGMA / ADOBE</li>
+            <li>SMM / КОНТЕНТ / ВИДЕО</li>
+            <li>ВАЙБ-КОДИНГ / C# / ПРОДУКТЫ</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="skills">
+      <h2 class="block-title">НАВЫКИ <span class="arrow">↘</span></h2>
+      <div class="skills-grid">
+        <div>
+          <h3 class="skills-label">РАБОТАЮ В:</h3>
+          <div class="tool-icons">
+            <div class="app-icon"><span class="app-badge app-ps">Ps</span><span class="app-name">Photoshop</span></div>
+            <div class="app-icon"><span class="app-badge app-ai">Ai</span><span class="app-name">Illustrator</span></div>
+            <div class="app-icon"><span class="app-badge app-lr">Lr</span><span class="app-name">Lightroom</span></div>
+            <div class="app-icon"><span class="app-badge app-figma">Fg</span><span class="app-name">Figma</span></div>
+            <div class="app-icon"><span class="app-badge app-davinci">Dv</span><span class="app-name">DaVinci</span></div>
+            <div class="app-icon"><span class="app-badge app-blender">Bl</span><span class="app-name">Blender</span></div>
+            <div class="app-icon"><span class="app-badge app-tilda">Td</span><span class="app-name">Tilda</span></div>
+            <div class="app-icon"><span class="app-badge app-bitrix">B24</span><span class="app-name">Битрикс24</span></div>
+            <div class="app-icon"><span class="app-badge app-metrica">М</span><span class="app-name">Метрика</span></div>
+            <div class="app-icon"><span class="app-badge app-csharp">C#</span><span class="app-name">CSharp</span></div>
+          </div>
+        </div>
+        <div>
+          <h3 class="skills-label">БАЗОВЫЕ ЗНАНИЯ:</h3>
+          <ul class="base-list">
+            <li>Бренд-менеджмент и позиционирование</li>
+            <li>Продвижение и развитие бренда</li>
+            <li>Маркетинговые и рыночные исследования</li>
+            <li>Анализ ЦА, УТП, медиапланы</li>
+            <li>Реклама, лидогенерация, Avito, таргет</li>
+            <li>SMM, копирайтинг, контент</li>
+            <li>Метрики охвата и вовлечённости</li>
+            <li>Яндекс.Метрика · Битрикс24 · 1С</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="gallery">
+      <h2 class="block-title">ГАЛЕРЕЯ РАБОТ <span class="arrow">↘</span></h2>
+      <p class="section-note">Проекты и материалы по компаниям.</p>
+
+      <div class="works-list">
+        <article class="work">
+          <div class="work-inner">
+            <div class="work-visual"><img src="assets/works/ast/ast-1.jpg" alt="АСТ" /></div>
+            <div class="work-info">
+              <p class="work-tag">Бренд · маркетплейсы · контент</p>
+              <h3>Издательство АСТ</h3>
+              <p>Карточки книг на Wildberries, визуалы для продвижения новинок: УТП, оформление и рекламные материалы.</p>
+            </div>
+          </div>
+          <div class="work-gallery">
+            <img src="assets/works/ast/ast-1.jpg" alt="" />
+            <img src="assets/works/ast/ast-2.jpg" alt="" />
+          </div>
+        </article>
+
+        <article class="work work-reverse">
+          <div class="work-inner">
+            <div class="work-visual"><img src="assets/works/ta-3.png" alt="TA Group" /></div>
+            <div class="work-info">
+              <p class="work-tag">Брендинг · презентации · веб</p>
+              <h3>TA Group</h3>
+              <p>Фирменный стиль холдинга, карта терминалов, инфографика, макеты сайта и выставочный стенд.</p>
+            </div>
+          </div>
+          <div class="work-gallery">
+            <img src="assets/works/ta-3.png" alt="" />
+            <img src="assets/works/ta-1.png" alt="" />
+            <img src="assets/works/ta-2.png" alt="" />
+            <img src="assets/works/ta-4.png" alt="" />
+          </div>
+        </article>
+
+        <article class="work">
+          <div class="work-inner">
+            <div class="work-visual"><img src="assets/works/vitality-2.png" alt="Виталити" /></div>
+            <div class="work-info">
+              <p class="work-tag">Маркетинг · медиабаинг · дизайн</p>
+              <h3>Виталити</h3>
+              <p>Айдентика, баннеры, презентации услуг, витрина Avito и аналитика трафика.</p>
+            </div>
+          </div>
+          <div class="work-gallery">
+            <img src="assets/works/vitality-2.png" alt="" />
+            <img src="assets/works/vitality-1.png" alt="" />
+            <img src="assets/works/vitality-3.png" alt="" />
+            <img src="assets/works/vitality-5.png" alt="" />
+          </div>
+        </article>
+
+        <article class="work work-reverse">
+          <div class="work-inner">
+            <div class="work-visual"><img src="assets/works/art-1.png" alt="Салон" /></div>
+            <div class="work-info">
+              <p class="work-tag">SMM · контент · веб</p>
+              <h3>Художественный салон</h3>
+              <p>Интерфейсы галереи, профили художников, контент для соцсетей и интервью.</p>
+            </div>
+          </div>
+          <div class="work-gallery">
+            <img src="assets/works/art-1.png" alt="" />
+            <img src="assets/works/art-2.png" alt="" />
+            <img src="assets/works/art-3.png" alt="" />
+            <img src="assets/works/art-4.png" alt="" />
+          </div>
+        </article>
+
+        <article class="work">
+          <div class="work-inner">
+            <div class="work-visual"><img src="assets/works/qis-3.png" alt="QI" /></div>
+            <div class="work-info">
+              <p class="work-tag">Дизайн · бренд-материалы</p>
+              <h3>QI System</h3>
+              <p>Презентации, прайс-листы, программа лояльности и визуальная система.</p>
+            </div>
+          </div>
+          <div class="work-gallery">
+            <img src="assets/works/qis-3.png" alt="" />
+            <img src="assets/works/qis-1.png" alt="" />
+            <img src="assets/works/qis-4.png" alt="" />
+            <img src="assets/works/qis-5.png" alt="" />
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="block" id="experience">
+      <h2 class="block-title">ОПЫТ <span class="arrow">↘</span></h2>
+      <div class="exp-grid">
+        <article class="exp-col">
+          <h3>НАСТОЯЩЕЕ</h3>
+          <div class="exp-item">
+            <p class="exp-role">Младший бренд-менеджер — АСТ</p>
+            <p class="exp-time">06.2025 — 05.2026</p>
+            <p>Полный цикл продвижения новых книг: ЦА, УТП, медиапланы в 1С, подрядчики, контент для сайта и маркетплейсов, реклама и контроль продаж.</p>
+            <ul>
+              <li>20 планов запуска книг — старт вовремя</li>
+              <li>3000 карточек товаров в Figma с УТП</li>
+              <li>10 рекламных кампаний · 9 презентаций · 5 мероприятий</li>
+            </ul>
+          </div>
+          <div class="exp-item">
+            <p class="exp-role">Маркетолог / медиабайер — Виталити</p>
+            <p class="exp-time">05.2023 — 10.2024</p>
+            <p>Лидогенерация (Avito, SEO, соцсети), УТП, имидж-материалы, аналитика в Битрикс24.</p>
+            <ul>
+              <li>Конверсия сайта 15%</li>
+              <li>2000 объявлений Avito · база 1500 контактов</li>
+            </ul>
+          </div>
+        </article>
+        <article class="exp-col">
+          <h3>ТАКЖЕ</h3>
+          <div class="exp-item">
+            <p class="exp-role">SMM-менеджер · руководитель группы — Худ. салон</p>
+            <p class="exp-time">01.2023 — 09.2024</p>
+            <p>Соцсети, контент-план, интервью с художниками, SEO/юзабилити, мероприятия и стенды.</p>
+          </div>
+          <div class="exp-item">
+            <p class="exp-role">Маркетолог / дизайнер — QI System</p>
+            <p class="exp-time">Проект · 2 месяца</p>
+            <p>Презентации, прайсы, визитки, сайт и аналитика лидов.</p>
+          </div>
+          <div class="exp-item">
+            <p class="exp-role">НАВЫКИ И ЧТО ДЕЛАЛ</p>
+            <p>Стратегии продвижения брендов, аккаунтинг, запуск книг и рекламных кампаний, медиапланы, карточки товаров и презентации, работа с авторами и подрядчиками, SMM и контент, лидогенерация, Avito, аналитика продаж и трафика, организация мероприятий, дизайн рекламных материалов, нейросети, вайб-кодинг и базовый C#. Soft skills: аналитика, многозадачность, креатив, переговоры, ориентация на результат.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer" id="contact">
+    <div class="footer-col">
+      <h3>СОЦИАЛЬНЫЕ СЕТИ</h3>
+      <a href="https://set.ki/account/GkMuLBS">Setka</a>
+    </div>
+    <div class="footer-col">
+      <h3>КОНТАКТЫ ДЛЯ СВЯЗИ</h3>
+      <a href="tel:+79856279652">+7 (985) 627-96-52</a>
+      <a href="mailto:mamedovamal@yandex.ru">mamedovamal@yandex.ru</a>
+    </div>
+    <div class="footer-col footer-copy">
+      <p>© All rights reserved<br />Мамедов Амаль 2026</p>
+    </div>
+  </footer>
+</body>
+</html>

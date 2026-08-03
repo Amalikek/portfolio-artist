@@ -6,7 +6,7 @@
 }
 
 :root {
-  --bg: #ffffff;
+  --bg: #faf9f7;
   --ink: #111111;
   --muted: #8a8a8a;
   --line: #ececec;
@@ -32,7 +32,13 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(ellipse 90% 55% at 12% 8%, rgba(210, 205, 195, 0.14), transparent 58%),
+    radial-gradient(ellipse 70% 45% at 88% 18%, rgba(190, 198, 205, 0.11), transparent 52%),
+    radial-gradient(ellipse 80% 50% at 70% 85%, rgba(220, 214, 204, 0.1), transparent 55%),
+    linear-gradient(180deg, #ffffff 0%, #faf9f7 45%, #f7f5f1 100%);
+  background-attachment: fixed;
   color: var(--ink);
   font-family: var(--font);
   font-size: 15px;
@@ -73,7 +79,9 @@ button {
   align-items: center;
   min-height: var(--header-h);
   padding: 0 var(--pad);
-  background: #fff;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .brand {
@@ -409,7 +417,7 @@ button {
     flex-direction: column;
     gap: 0;
     padding: 0.25rem var(--pad) 1rem;
-    background: #fff;
+    background: rgba(255, 255, 255, 0.92);
     border-bottom: 1px solid var(--line);
     justify-self: stretch;
   }

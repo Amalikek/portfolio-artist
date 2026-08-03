@@ -13,10 +13,10 @@
 }
 
 :root {
-  --bg: #0a0a0a;
-  --ink: #f2f0eb;
+  --bg: #f7f5f1;
+  --ink: #1a1a1a;
   --muted: #8a8680;
-  --line: rgba(255, 255, 255, 0.1);
+  --line: rgba(26, 26, 26, 0.1);
   --font-display: "Instrument Serif", "Times New Roman", Georgia, serif;
   --font: "Source Sans 3", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --pad: clamp(1.25rem, 4vw, 3.5rem);
@@ -95,13 +95,13 @@ button {
   font-size: clamp(0.95rem, 1.6vw, 1.15rem);
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(26, 26, 26, 0.78);
   transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 .nav a:hover,
 .nav a.is-active {
-  color: #fff;
+  color: var(--ink);
 }
 
 .lang-switch {
@@ -115,11 +115,11 @@ button {
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(26, 26, 26, 0.4);
 }
 
-.lang-btn:hover { color: rgba(255, 255, 255, 0.85); }
-.lang-btn.is-active { color: #fff; }
+.lang-btn:hover { color: rgba(26, 26, 26, 0.75); }
+.lang-btn.is-active { color: var(--ink); }
 
 .menu-btn {
   display: none;
@@ -135,7 +135,7 @@ button {
   display: block;
   width: 16px;
   height: 1.5px;
-  background: #fff;
+  background: var(--ink);
   transition: transform 0.3s var(--ease);
 }
 
@@ -147,7 +147,7 @@ button {
   transform: translateY(-3.25px) rotate(-45deg);
 }
 
-/* Hero — painting as atmospheric background (Rita-style) */
+/* Hero — painting as soft atmospheric background */
 .hero {
   position: relative;
   display: grid;
@@ -155,7 +155,7 @@ button {
   min-height: min(88svh, 920px);
   padding: calc(var(--header-h) + 2rem) var(--pad) 4rem;
   overflow: hidden;
-  background: #111;
+  background: #efece6;
 }
 
 .hero-bg {
@@ -169,8 +169,8 @@ button {
   height: 100%;
   object-fit: cover;
   object-position: center 30%;
-  filter: saturate(0.7) brightness(0.72) contrast(1.08);
-  opacity: 0.78;
+  filter: saturate(0.55) brightness(1.15) contrast(0.95);
+  opacity: 0.28;
   transform: scale(1.06);
 }
 
@@ -179,8 +179,8 @@ button {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 65% 55% at 50% 42%, rgba(10, 10, 10, 0.2), rgba(10, 10, 10, 0.55) 70%),
-    linear-gradient(180deg, rgba(10, 10, 10, 0.25) 0%, rgba(10, 10, 10, 0.4) 50%, var(--bg) 100%);
+    radial-gradient(ellipse 70% 60% at 50% 42%, rgba(247, 245, 241, 0.35), rgba(247, 245, 241, 0.72) 72%),
+    linear-gradient(180deg, rgba(247, 245, 241, 0.45) 0%, rgba(247, 245, 241, 0.65) 50%, var(--bg) 100%);
 }
 
 .hero-title {
@@ -194,8 +194,8 @@ button {
   font-weight: 400;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.94);
-  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.35);
+  color: rgba(26, 26, 26, 0.9);
+  text-shadow: none;
 }
 
 /* Projects grid */
@@ -228,7 +228,7 @@ button {
   width: 100%;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: #141414;
+  background: #eceae5;
 }
 
 .project-thumb img {
@@ -253,7 +253,7 @@ button {
   font-size: clamp(0.78rem, 1.2vw, 0.95rem);
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.88);
+  color: rgba(26, 26, 26, 0.88);
 }
 
 .project-year {
@@ -294,14 +294,14 @@ button {
 }
 
 .contact-links a {
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(26, 26, 26, 0.82);
   font-size: 1rem;
   padding: 0.2rem;
   transition: color 0.2s ease;
 }
 
 .contact-links a:hover {
-  color: #fff;
+  color: var(--ink);
 }
 
 .socials {
@@ -407,7 +407,7 @@ button {
     flex-direction: column;
     gap: 0;
     padding: calc(var(--header-h) + 0.5rem) var(--pad) 1rem;
-    background: rgba(10, 10, 10, 0.96);
+    background: rgba(247, 245, 241, 0.97);
     border-bottom: 1px solid var(--line);
   }
 

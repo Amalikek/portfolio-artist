@@ -4,4 +4,4 @@
 
 Языки: RU / EN / AZ
 
-Онлайн: **https://amalikek.github.io/GARYAGDY-portfolio-artist/**
+Онлайн: **https://gatyagdy1.github.io/**

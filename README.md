@@ -4,4 +4,4 @@
 
 Языки: RU / EN / AZ
 
-Онлайн: **https://gatyagdy1.github.io/**
+Онлайн: **https://garyagdy1.github.io/**

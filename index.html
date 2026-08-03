@@ -4,15 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="Гарягды — художник. Портфолио." />
-  <meta name="theme-color" content="#faf9f7" />
+  <meta name="theme-color" content="#0a0a0a" />
   <title>Гарягды — Портфолио</title>
-  <link rel="stylesheet" href="styles.css?v=20260803-1827" />
+  <link rel="stylesheet" href="styles.css?v=20260803-1835" />
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="#top" data-i18n="brand">Гарягды</a>
     <nav class="nav" id="nav" aria-label="Main">
-      <a href="#portfolio" data-i18n="nav_portfolio">Портфолио</a>
+      <a href="#projects" data-i18n="nav_portfolio">Портфолио</a>
       <a href="#author" data-i18n="nav_author">Гарягды</a>
     </nav>
     <div class="lang-switch" role="group" aria-label="Language">
@@ -26,29 +25,19 @@
   </header>
 
   <main id="top">
-    <section class="hero">
-      <button type="button" class="hero-frame" id="heroOpen" aria-label="Open">
-        <img src="assets/art/building.png" alt="" id="heroImg" />
-      </button>
+    <section class="hero" aria-label="Гарягды">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="assets/art/building.jpg" alt="" />
+      </div>
+      <h1 class="hero-title" data-i18n="brand">Гарягды</h1>
     </section>
 
-    <section class="portfolio" id="portfolio">
-      <h2 class="section-title" data-i18n="portfolio_title">Портфолио</h2>
-
-      <div class="slider" id="slider">
-        <button type="button" class="slider-arrow prev" id="slidePrev" aria-label="Previous">‹</button>
-        <div class="slider-stage" id="sliderStage">
-          <img id="slideImg" src="assets/art/work-02.png" alt="" />
-        </div>
-        <button type="button" class="slider-arrow next" id="slideNext" aria-label="Next">›</button>
-      </div>
-
-      <p class="slider-count"><span id="slideCurrent">1</span> / <span id="slideTotal">9</span></p>
-      <div class="thumbs" id="thumbs" aria-label="Portfolio"></div>
+    <section class="projects" id="projects">
+      <div class="projects-grid" id="projectsGrid"></div>
     </section>
 
     <section class="author" id="author">
-      <h2 class="section-title" data-i18n="author_title">Гарягды</h2>
+      <h2 class="author-name" data-i18n="brand">Гарягды</h2>
       <p class="author-lead" data-i18n="author_lead">Художник</p>
       <div class="contact-links">
         <a href="tel:+79856279652">+7 (985) 627-96-52</a>
@@ -74,6 +63,6 @@
     <button type="button" class="lightbox-nav next" id="lightboxNext" aria-label="Next">›</button>
   </div>
 
-  <script src="script.js?v=20260803-1827"></script>
+  <script src="script.js?v=20260803-1835"></script>
 </body>
 </html>

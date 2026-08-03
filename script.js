@@ -1,13 +1,14 @@
 const works = [
-  { src: "assets/art/work-02.png", altKey: "work_children" },
-  { src: "assets/art/work-04.png", altKey: "work_n" },
-  { src: "assets/art/work-05.png", altKey: "work_n" },
-  { src: "assets/art/work-07.png", altKey: "work_n" },
-  { src: "assets/art/work-08.png", altKey: "work_n" },
-  { src: "assets/art/work-09.png", altKey: "work_n" },
-  { src: "assets/art/work-10.png", altKey: "work_n" },
-  { src: "assets/art/work-11.png", altKey: "work_n" },
-  { src: "assets/art/work-12.png", altKey: "work_n" },
+  { src: "assets/art/building.jpg", titleKey: "work_building", year: "2026" },
+  { src: "assets/art/work-02.jpg", titleKey: "work_children", year: "2026" },
+  { src: "assets/art/work-04.jpg", titleKey: "work_n", year: "2026" },
+  { src: "assets/art/work-05.jpg", titleKey: "work_n", year: "2026" },
+  { src: "assets/art/work-07.jpg", titleKey: "work_n", year: "2026" },
+  { src: "assets/art/work-08.jpg", titleKey: "work_n", year: "2026" },
+  { src: "assets/art/work-09.jpg", titleKey: "work_n", year: "2026" },
+  { src: "assets/art/work-10.jpg", titleKey: "work_n", year: "2026" },
+  { src: "assets/art/work-11.jpg", titleKey: "work_n", year: "2026" },
+  { src: "assets/art/work-12.jpg", titleKey: "work_n", year: "2026" },
 ];
 
 const i18n = {
@@ -15,8 +16,6 @@ const i18n = {
     brand: "Гарягды",
     nav_portfolio: "Портфолио",
     nav_author: "Гарягды",
-    portfolio_title: "Портфолио",
-    author_title: "Гарягды",
     author_lead: "Художник",
     socials_label: "Соцсети",
     socials_soon: "скоро",
@@ -27,10 +26,8 @@ const i18n = {
   },
   en: {
     brand: "Garyagdy",
-    nav_portfolio: "Portfolio",
+    nav_portfolio: "Projects",
     nav_author: "Garyagdy",
-    portfolio_title: "Portfolio",
-    author_title: "Garyagdy",
     author_lead: "Artist",
     socials_label: "Social",
     socials_soon: "coming soon",
@@ -41,10 +38,8 @@ const i18n = {
   },
   az: {
     brand: "Qaryağdı",
-    nav_portfolio: "Portfolio",
+    nav_portfolio: "Layihələr",
     nav_author: "Qaryağdı",
-    portfolio_title: "Portfolio",
-    author_title: "Qaryağdı",
     author_lead: "Rəssam",
     socials_label: "Sosial şəbəkələr",
     socials_soon: "tezliklə",
@@ -61,12 +56,12 @@ if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 let lang = localStorage.getItem("garyagdy-lang") || "ru";
 if (!i18n[lang]) lang = "ru";
 
-let slideIndex = 0;
+let activeIndex = 0;
 
-function altFor(work, index) {
+function titleFor(work, index) {
   const t = i18n[lang];
-  if (work.altKey === "work_n") return `${t.work_n} ${index + 1}`;
-  return t[work.altKey] || t.work_n;
+  if (work.titleKey === "work_n") return `${t.work_n} ${index + 1}`;
+  return t[work.titleKey] || t.work_n;
 }
 
 function applyLang(next) {
@@ -84,90 +79,54 @@ function applyLang(next) {
     btn.classList.toggle("is-active", btn.dataset.lang === lang);
   });
 
-  renderSlide(slideIndex, false);
+  renderGrid();
 }
 
 document.querySelectorAll(".lang-btn").forEach((btn) => {
   btn.addEventListener("click", () => applyLang(btn.dataset.lang));
 });
 
-/* ——— Slider ——— */
-const slideImg = document.getElementById("slideImg");
-const slideStage = document.getElementById("sliderStage");
-const slideCurrent = document.getElementById("slideCurrent");
-const slideTotal = document.getElementById("slideTotal");
-const thumbs = document.getElementById("thumbs");
-const heroImg = document.getElementById("heroImg");
+const grid = document.getElementById("projectsGrid");
 
-slideTotal.textContent = String(works.length);
+function renderGrid() {
+  if (!grid) return;
+  grid.innerHTML = "";
 
-works.forEach((work, index) => {
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = "thumb";
-  btn.dataset.index = String(index);
-  btn.setAttribute("aria-label", `Work ${index + 1}`);
-  const img = document.createElement("img");
-  img.src = work.src;
-  img.alt = "";
-  img.loading = "lazy";
-  btn.appendChild(img);
-  btn.addEventListener("click", () => goTo(index));
-  thumbs.appendChild(btn);
-});
+  works.forEach((work, index) => {
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "project-card";
+    card.setAttribute("aria-label", titleFor(work, index));
 
-function renderSlide(index, animate = true) {
-  slideIndex = (index + works.length) % works.length;
-  const work = works[slideIndex];
+    const thumb = document.createElement("div");
+    thumb.className = "project-thumb";
+    const img = document.createElement("img");
+    img.src = work.src;
+    img.alt = "";
+    img.loading = index < 3 ? "eager" : "lazy";
+    img.decoding = "async";
+    thumb.appendChild(img);
 
-  if (animate) slideStage.classList.add("is-fading");
+    const meta = document.createElement("div");
+    meta.className = "project-meta";
+    const title = document.createElement("span");
+    title.className = "project-title";
+    title.textContent = titleFor(work, index);
+    const year = document.createElement("span");
+    year.className = "project-year";
+    year.textContent = work.year;
+    meta.append(title, year);
 
-  const apply = () => {
-    slideImg.src = work.src;
-    slideImg.alt = altFor(work, slideIndex);
-    slideCurrent.textContent = String(slideIndex + 1);
-    slideStage.classList.remove("is-fading");
-
-    document.querySelectorAll(".thumb").forEach((el, i) => {
-      el.classList.toggle("is-active", i === slideIndex);
-    });
-
-    const activeThumb = thumbs.querySelector(".thumb.is-active");
-    activeThumb?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  };
-
-  if (animate) {
-    window.setTimeout(apply, 120);
-  } else {
-    apply();
-  }
-
-  if (heroImg) heroImg.alt = i18n[lang].work_building || "";
+    card.append(thumb, meta);
+    card.addEventListener("click", () => openLightbox(index));
+    grid.appendChild(card);
+  });
 }
 
-function goTo(index) {
-  renderSlide(index, true);
-}
-
-function step(delta) {
-  goTo(slideIndex + delta);
-}
-
-document.getElementById("slidePrev")?.addEventListener("click", () => step(-1));
-document.getElementById("slideNext")?.addEventListener("click", () => step(1));
-
-slideStage?.addEventListener("click", () => openLightbox(slideIndex));
-document.getElementById("heroOpen")?.addEventListener("click", () => {
-  openHeroLightbox();
-});
-
-/* Always start at the top when the page opens */
+/* Always start at the top */
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 window.scrollTo(0, 0);
 window.addEventListener("load", () => window.scrollTo(0, 0));
-
-/* Swipe on slider */
-bindSwipe(document.getElementById("slider"), (dir) => step(dir));
 
 applyLang(lang);
 
@@ -187,12 +146,12 @@ nav?.querySelectorAll("a").forEach((link) => {
   });
 });
 
-const sections = ["portfolio", "author"]
+const sections = ["projects", "author"]
   .map((id) => document.getElementById(id))
   .filter(Boolean);
 
 function updateActiveNav() {
-  const y = window.scrollY + 120;
+  const y = window.scrollY + 140;
   let current = "";
   sections.forEach((sec) => {
     if (sec.offsetTop <= y) current = sec.id;
@@ -208,24 +167,12 @@ updateActiveNav();
 /* Lightbox */
 const lightbox = document.getElementById("lightbox");
 const lightboxImg = document.getElementById("lightboxImg");
-let lightboxIndex = 0;
-let lightboxMode = "works"; // "works" | "hero"
 
 function openLightbox(index) {
-  lightboxMode = "works";
-  lightboxIndex = (index + works.length) % works.length;
-  const work = works[lightboxIndex];
+  activeIndex = (index + works.length) % works.length;
+  const work = works[activeIndex];
   lightboxImg.src = work.src;
-  lightboxImg.alt = altFor(work, lightboxIndex);
-  lightbox.hidden = false;
-  document.body.style.overflow = "hidden";
-  goTo(lightboxIndex);
-}
-
-function openHeroLightbox() {
-  lightboxMode = "hero";
-  lightboxImg.src = "assets/art/building.png";
-  lightboxImg.alt = i18n[lang].work_building || "";
+  lightboxImg.alt = titleFor(work, activeIndex);
   lightbox.hidden = false;
   document.body.style.overflow = "hidden";
 }
@@ -234,15 +181,10 @@ function closeLightbox() {
   lightbox.hidden = true;
   document.body.style.overflow = "";
   lightboxImg.src = "";
-  lightboxMode = "works";
 }
 
 function lightboxStep(delta) {
-  if (lightboxMode === "hero") {
-    openLightbox(delta > 0 ? 0 : works.length - 1);
-    return;
-  }
-  openLightbox(lightboxIndex + delta);
+  openLightbox(activeIndex + delta);
 }
 
 document.getElementById("lightboxClose")?.addEventListener("click", closeLightbox);
@@ -254,14 +196,10 @@ lightbox?.addEventListener("click", (e) => {
 });
 
 document.addEventListener("keydown", (e) => {
-  if (!lightbox.hidden) {
-    if (e.key === "Escape") closeLightbox();
-    if (e.key === "ArrowLeft") lightboxStep(-1);
-    if (e.key === "ArrowRight") lightboxStep(1);
-    return;
-  }
-  if (e.key === "ArrowLeft") step(-1);
-  if (e.key === "ArrowRight") step(1);
+  if (lightbox.hidden) return;
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowLeft") lightboxStep(-1);
+  if (e.key === "ArrowRight") lightboxStep(1);
 });
 
 bindSwipe(lightbox, (dir) => {

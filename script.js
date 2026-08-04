@@ -1,14 +1,36 @@
 const works = [
-  { src: "assets/art/building.jpg", titleKey: "work_building", year: "2026" },
-  { src: "assets/art/work-02.jpg", titleKey: "work_children", year: "2026" },
-  { src: "assets/art/work-04.jpg", titleKey: "work_n", year: "2026" },
-  { src: "assets/art/work-05.jpg", titleKey: "work_n", year: "2026" },
-  { src: "assets/art/work-07.jpg", titleKey: "work_n", year: "2026" },
-  { src: "assets/art/work-08.jpg", titleKey: "work_n", year: "2026" },
-  { src: "assets/art/work-09.jpg", titleKey: "work_n", year: "2026" },
-  { src: "assets/art/work-10.jpg", titleKey: "work_n", year: "2026" },
-  { src: "assets/art/work-11.jpg", titleKey: "work_n", year: "2026" },
-  { src: "assets/art/work-12.jpg", titleKey: "work_n", year: "2026" },
+  {
+    src: "assets/art/work-01.jpg",
+    titles: { ru: "Вертикаль", en: "Vertical", az: "Vertikal" },
+  },
+  {
+    src: "assets/art/work-02.jpg",
+    titles: { ru: "Тень", en: "Shadow", az: "Kölgə" },
+  },
+  {
+    src: "assets/art/work-03.jpg",
+    titles: { ru: "Стол с бокалами", en: "Table with glasses", az: "Stəkanlı masa" },
+  },
+  {
+    src: "assets/art/work-04.jpg",
+    titles: { ru: "Маки и глаза", en: "Poppies and eyes", az: "Lalələr və gözlər" },
+  },
+  {
+    src: "assets/art/work-05.jpg",
+    titles: { ru: "Стол и стулья", en: "Table and chairs", az: "Masa və stullar" },
+  },
+  {
+    src: "assets/art/work-06.jpg",
+    titles: { ru: "Синий крест", en: "Blue cross", az: "Mavi xaç" },
+  },
+  {
+    src: "assets/art/work-07.jpg",
+    titles: { ru: "Красный стул", en: "Red chair", az: "Qırmızı stul" },
+  },
+  {
+    src: "assets/art/work-08.jpg",
+    titles: { ru: "Пляж", en: "Beach", az: "Çimərlik" },
+  },
 ];
 
 const i18n = {
@@ -19,9 +41,7 @@ const i18n = {
     author_lead: "Художник",
     socials_label: "Соцсети",
     socials_soon: "скоро",
-    work_building: "Здание",
-    work_children: "С детьми",
-    work_n: "Работа",
+    roulette_hint: "листайте мышкой",
     title: "Гарягды — Портфолио",
   },
   en: {
@@ -31,9 +51,7 @@ const i18n = {
     author_lead: "Artist",
     socials_label: "Social",
     socials_soon: "coming soon",
-    work_building: "Building",
-    work_children: "With children",
-    work_n: "Work",
+    roulette_hint: "drag to scroll",
     title: "Garyagdy — Portfolio",
   },
   az: {
@@ -43,9 +61,7 @@ const i18n = {
     author_lead: "Rəssam",
     socials_label: "Sosial şəbəkələr",
     socials_soon: "tezliklə",
-    work_building: "Bina",
-    work_children: "Uşaqlarla",
-    work_n: "İş",
+    roulette_hint: "siçan ilə sürüşdürün",
     title: "Qaryağdı — Portfolio",
   },
 };
@@ -58,10 +74,8 @@ if (!i18n[lang]) lang = "ru";
 
 let activeIndex = 0;
 
-function titleFor(work, index) {
-  const t = i18n[lang];
-  if (work.titleKey === "work_n") return `${t.work_n} ${index + 1}`;
-  return t[work.titleKey] || t.work_n;
+function titleFor(work) {
+  return work.titles[lang] || work.titles.ru;
 }
 
 function applyLang(next) {
@@ -79,49 +93,141 @@ function applyLang(next) {
     btn.classList.toggle("is-active", btn.dataset.lang === lang);
   });
 
-  renderGrid();
+  renderRoulette();
 }
 
 document.querySelectorAll(".lang-btn").forEach((btn) => {
   btn.addEventListener("click", () => applyLang(btn.dataset.lang));
 });
 
-const grid = document.getElementById("projectsGrid");
+const roulette = document.getElementById("roulette");
+const track = document.getElementById("rouletteTrack");
 
-function renderGrid() {
-  if (!grid) return;
-  grid.innerHTML = "";
+function renderRoulette() {
+  if (!track) return;
+  track.innerHTML = "";
 
-  works.forEach((work, index) => {
+  // Repeat once so the roulette feels fuller when scrolling
+  const deck = [...works, ...works];
+
+  deck.forEach((work, index) => {
+    const realIndex = index % works.length;
     const card = document.createElement("button");
     card.type = "button";
-    card.className = "project-card";
-    card.setAttribute("aria-label", titleFor(work, index));
+    card.className = "roulette-card";
+    card.dataset.index = String(realIndex);
+    card.setAttribute("aria-label", titleFor(work));
 
     const thumb = document.createElement("div");
-    thumb.className = "project-thumb";
+    thumb.className = "roulette-thumb";
     const img = document.createElement("img");
     img.src = work.src;
     img.alt = "";
-    img.loading = index < 3 ? "eager" : "lazy";
+    img.loading = index < 4 ? "eager" : "lazy";
     img.decoding = "async";
+    img.draggable = false;
     thumb.appendChild(img);
 
-    const meta = document.createElement("div");
-    meta.className = "project-meta";
     const title = document.createElement("span");
-    title.className = "project-title";
-    title.textContent = titleFor(work, index);
-    const year = document.createElement("span");
-    year.className = "project-year";
-    year.textContent = work.year;
-    meta.append(title, year);
+    title.className = "roulette-title";
+    title.textContent = titleFor(work);
 
-    card.append(thumb, meta);
-    card.addEventListener("click", () => openLightbox(index));
-    grid.appendChild(card);
+    card.append(thumb, title);
+    card.addEventListener("click", (e) => {
+      if (roulette?.dataset.dragged === "1") {
+        e.preventDefault();
+        return;
+      }
+      openLightbox(realIndex);
+    });
+    track.appendChild(card);
+  });
+
+  requestAnimationFrame(() => {
+    updateActiveCards();
+    // Start near the middle of the first set
+    if (roulette && track.children.length) {
+      const first = track.children[Math.min(2, track.children.length - 1)];
+      const left = first.offsetLeft - (roulette.clientWidth - first.clientWidth) / 2;
+      roulette.scrollLeft = Math.max(0, left);
+      updateActiveCards();
+    }
   });
 }
+
+function updateActiveCards() {
+  if (!roulette || !track) return;
+  const center = roulette.scrollLeft + roulette.clientWidth / 2;
+  let best = null;
+  let bestDist = Infinity;
+
+  [...track.children].forEach((card) => {
+    const mid = card.offsetLeft + card.offsetWidth / 2;
+    const dist = Math.abs(mid - center);
+    card.classList.toggle("is-active", false);
+    if (dist < bestDist) {
+      bestDist = dist;
+      best = card;
+    }
+  });
+  best?.classList.add("is-active");
+}
+
+roulette?.addEventListener("scroll", () => updateActiveCards(), { passive: true });
+
+/* Mouse drag to scroll roulette */
+(() => {
+  if (!roulette) return;
+  let down = false;
+  let startX = 0;
+  let startScroll = 0;
+  let moved = 0;
+
+  const onDown = (x) => {
+    down = true;
+    moved = 0;
+    startX = x;
+    startScroll = roulette.scrollLeft;
+    roulette.classList.add("is-dragging");
+    roulette.dataset.dragged = "0";
+  };
+
+  const onMove = (x) => {
+    if (!down) return;
+    const dx = x - startX;
+    moved = Math.max(moved, Math.abs(dx));
+    roulette.scrollLeft = startScroll - dx;
+    if (moved > 6) roulette.dataset.dragged = "1";
+  };
+
+  const onUp = () => {
+    if (!down) return;
+    down = false;
+    roulette.classList.remove("is-dragging");
+    window.setTimeout(() => {
+      roulette.dataset.dragged = "0";
+    }, 40);
+  };
+
+  roulette.addEventListener("mousedown", (e) => {
+    if (e.button !== 0) return;
+    e.preventDefault();
+    onDown(e.clientX);
+  });
+  window.addEventListener("mousemove", (e) => onMove(e.clientX));
+  window.addEventListener("mouseup", onUp);
+
+  roulette.addEventListener(
+    "wheel",
+    (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        e.preventDefault();
+        roulette.scrollLeft += e.deltaY;
+      }
+    },
+    { passive: false }
+  );
+})();
 
 /* Always start at the top */
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
@@ -172,7 +278,7 @@ function openLightbox(index) {
   activeIndex = (index + works.length) % works.length;
   const work = works[activeIndex];
   lightboxImg.src = work.src;
-  lightboxImg.alt = titleFor(work, activeIndex);
+  lightboxImg.alt = titleFor(work);
   lightbox.hidden = false;
   document.body.style.overflow = "hidden";
 }

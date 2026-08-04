@@ -6,7 +6,7 @@
   <meta name="description" content="Гарягды — художник. Портфолио." />
   <meta name="theme-color" content="#f7f5f1" />
   <title>Гарягды — Портфолио</title>
-  <link rel="stylesheet" href="styles.css?v=20260803-1840" />
+  <link rel="stylesheet" href="styles.css?v=20260804-1725" />
 </head>
 <body>
   <header class="site-header">
@@ -25,15 +25,18 @@
   </header>
 
   <main id="top">
-    <section class="hero" aria-label="Гарягды">
+    <section class="hero" id="projects" aria-label="Гарягды">
       <div class="hero-bg" aria-hidden="true">
-        <img src="assets/art/building.jpg" alt="" />
+        <img src="assets/art/hero.jpg" alt="" />
       </div>
       <h1 class="hero-title" data-i18n="brand">Гарягды</h1>
-    </section>
 
-    <section class="projects" id="projects">
-      <div class="projects-grid" id="projectsGrid"></div>
+      <div class="roulette-wrap">
+        <div class="roulette" id="roulette" tabindex="0" aria-label="Portfolio">
+          <div class="roulette-track" id="rouletteTrack"></div>
+        </div>
+        <p class="roulette-hint" data-i18n="roulette_hint">листайте мышкой</p>
+      </div>
     </section>
 
     <section class="author" id="author">
@@ -63,6 +66,6 @@
     <button type="button" class="lightbox-nav next" id="lightboxNext" aria-label="Next">›</button>
   </div>
 
-  <script src="script.js?v=20260803-1840"></script>
+  <script src="script.js?v=20260804-1725"></script>
 </body>
 </html>
